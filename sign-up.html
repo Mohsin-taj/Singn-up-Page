@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Form</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <form [formGroup]="signupForm" (ngSubmit)="onsubmit()">
+            <div class="heading">
+                <h1>New Account</h1>
+            </div>
+            
+            <div class="formInfo">
+            <label>First Name : </label>
+            <br>
+            <input type="text" name="FirstName" formControlName="firstname" placeholder="Enter Your First Name...">
+            @if (signupForm.get('firstname')?.touched && signupForm.get('firstname')?.hasError('required')) {
+            <div style="color: red; font-size: medium;">First name is required</div>
+            }
+            <br>
+
+            <label>Last Name : </label>
+            <br>
+            <input type="text" name="LastName" formControlName="lastname" placeholder="Enter Your Last Name...">
+            @if (signupForm.get('lastname')?.touched && signupForm.get('lastname')?.hasError('required')) {
+            <div style="color: red;font-size: medium;">Last name is required</div>
+            }
+            <br>
+
+            <label>Email : </label>
+            <br>
+            <input type="email" name="Email" formControlName="email" placeholder="Enter Your Email...">
+            @if(signupForm.get('email')?.touched && signupForm.get('email')?.hasError('required')){
+                <div style="color: red;font-size: medium;">Enter email</div>
+            }
+            @if (signupForm.get('email')?.touched && signupForm.get('email')?.hasError('email')) {
+            <div style="color: red;font-size: medium;">Enter a valid email</div>
+            }
+            <br>
+
+            <label>Password : </label>
+            <br>
+            <input type="password" name="Password" formControlName="password" placeholder="Enter Your Password..">
+            @if(signupForm.get('password')?.touched && signupForm.get('password')?.hasError('required')){
+                <div style="color: red;font-size: medium;">Enter password</div>
+            }
+            @if (signupForm.get('password')?.touched && signupForm.get('password')?.hasError('pattern')) {
+            <div style="color: red;font-size: medium;">Password must be 8+ chars with uppercase, lowercase, number & special char</div>
+            }
+            <br>
+
+            <label>Confirm Password : </label>
+            <br>
+            <input type="password" name="ConfirmPassword" formControlName="confirmpassword" placeholder="Confirm Password...">
+            @if(signupForm.get('confirmpassword')?.touched && signupForm.get('confirmpassword')?.hasError('required')){
+                <div style="color: red;font-size: medium;">Enter confirm password</div>
+            }
+            @if (signupForm.get('confirmpassword')?.touched && signupForm.get('confirmpassword')?.hasError('pattern')) {
+            <div style="color: red;font-size: medium;">Password format invalid</div>
+            }
+
+            @if (passwordMismatch) {
+            <div style="color: red;font-size: medium;">Passwords do not match</div>
+            }
+            </div>
+            <br>
+
+            <div class="btn">
+            <button type="submit" [disabled]="signupForm.invalid">Submit</button>
+            </div>
+            
+        </form>
+    </div>
+
+
+</body>
+
+</html>
